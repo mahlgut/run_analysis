@@ -30,7 +30,6 @@ v1vector <- features[meanvector | stdvector, 1]
 #filter by mean and stddeviation
 testXfiltered <- testX[v1vector]
 trainXfiltered <- trainX[v1vector]
-dim(testXfiltered)
 
 #rename Subject and Activity File and subset Activity code to descriptive names
 
@@ -55,8 +54,6 @@ testData <- cbind(testSubject, testY, testXfiltered)
 mergedData <- rbind(trainData, testData)
 
 #rename column-names
-names(mergedData)
-length(names(mergedData))
 nameCol <- c(names(mergedData))
 
 for (i in 3:length(nameCol)){
