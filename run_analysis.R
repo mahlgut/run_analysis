@@ -70,21 +70,44 @@ colnames(mergedData) <- nameCol
 
 #create new data set with average for each subject and activity
 
-newdf <- data.frame(matrix(nrow = 0, ncol = length(nameCol)))
+newdf <- data.frame(a = 1:30, matrix(nrow = 30 * nrow(activityLabel), ncol = length(nameCol)))
 colnames(newdf) <- nameCol
 
-#unname activitylabels
-mergedDatanew <- mergedData
+k <- 1
 
-for (i in 3:length(nameCol)){
-
-  for (j in 1:30){
+for (i in 1:nrow(newdf)){
   
-    for (k in 1:nrow(activityLabel)){
-  
-      meanSubject <- mean(mergedData[i][mergedData$Subject == j & mergedData$Activity == k])
-      newdf$Subject <- j
-      newdf$Activity <- k
-    }
+  if (i >= 31 & i < 61){
+    k <- 2
+  }else if (i >= 61 & i < 91){
+    k <- 3
+  }else if (i >= 91 & i < 121){
+    k <- 4
+  } else if (i >= 121 & i < 151){
+    k <- 5
+  }else if (i >= 151){
+    k <- 6
   }
+  
+  newdf[i, 2] <- k
+  
 }
+#rename activity code
+for (i in 1:nrow(activityLabel)){
+  
+  newdf$Activity[newdf$Activity == i] <- activityLabel[i,2]
+
+}
+newdf[1,2]
+
+#fill mean values for each row
+for (j in 1:nrow(newdf)){
+for (i in 3:length(nameCol)){
+  
+      meanSubject <- mean(mergedData[[i]][mergedData$Subject == newdf[j,1] & mergedData$Activity == newdf[j,2]])
+      newdf[j,i] <- meanSubject     
+}
+}
+
+write.table(newdf, file = "./data/run_analysis_meanoutput.txt", row.names = FALSE)
+
