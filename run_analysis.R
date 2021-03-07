@@ -70,6 +70,8 @@ colnames(mergedData) <- nameCol
 newdf <- data.frame(a = 1:30, matrix(nrow = 30 * nrow(activityLabel), ncol = length(nameCol)))
 colnames(newdf) <- nameCol
 
+#for loop for assignin activity to subject
+
 k <- 1
 
 for (i in 1:nrow(newdf)){
