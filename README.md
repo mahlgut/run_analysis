@@ -11,3 +11,6 @@ The Subject and Activity columns are renamed to descriptive values with accordin
 To merge the data, first the test and training data are merged with cbind(). Afterwards, both files are merged with rbind(), because they are built up likewise, only with a different number of rows.
 
 The column names are renamed with a for-loop. Every name has a number, which can be looked up in the file features.txt.
+
+
+Finally, the mean values of each subject and activity are calculated and written into a seperate .txt file
